@@ -1,0 +1,29 @@
+version: '2.1'
+services:
+  app:
+    image: chu3la/bestinsuranceapi  # Replace with your Spring Boot app's image name
+    depends_on:
+      - db
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/best-insurance-api  # Replace with your database name
+      - SPRING_DATASOURCE_USERNAME=root  # Replace with your database username
+      - SPRING_DATASOURCE_PASSWORD=aze102030.  # Replace with your database password
+      - SPRING_JPA_HIBERNATE_DDL_AUTO=validate
+#      - JAVA_TOOL_OPTIONS=-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5005
+    ports:
+      - "9002:9002"
+#      - "5005:5005"
+    networks:
+      - backend
+
+  db:
+    image: postgres:14.5-alpine
+    environment:
+      - POSTGRES_DB=best-insurance-api  # Replace with your database name
+      - POSTGRES_USER=root  # Replace with your database username
+      - POSTGRES_PASSWORD=aze102030.  # Replace with your database password
+    networks:
+      - backend
+
+networks:
+  backend:
